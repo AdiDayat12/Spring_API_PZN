@@ -3,6 +3,7 @@ package com.linan.spring_restfull_api.service;
 import com.linan.spring_restfull_api.entity.User;
 import com.linan.spring_restfull_api.model.LoginUserRequest;
 import com.linan.spring_restfull_api.model.TokenResponse;
+import com.linan.spring_restfull_api.model.WebResponse;
 import com.linan.spring_restfull_api.repository.UserRepository;
 import com.linan.spring_restfull_api.security.BCrypt;
 import jakarta.transaction.Transactional;
@@ -43,6 +44,13 @@ public class AuthService {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Username or password is wrong");
         }
 
+    }
+
+    @Transactional
+    public void logout (User user){
+        user.setToken(null);
+        user.setTokenExpiredAt(null);
+        userRepository.save(user);
     }
 
     private Long next30Days () {

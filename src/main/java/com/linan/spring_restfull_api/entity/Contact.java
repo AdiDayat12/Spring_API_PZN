@@ -16,9 +16,6 @@ public class Contact {
     @Id
     private String id;
 
-    @Column(length = 100, nullable = false)
-    private String username;
-
     @Column(name = "first_name", length = 100, nullable = false)
     private String firstName;
 
@@ -32,7 +29,7 @@ public class Contact {
     private String email;
 
     @ManyToOne
-    @JoinColumn(name = "username_id", referencedColumnName = "username")
+    @JoinColumn(name = "username", referencedColumnName = "username")
     private User user;
 
     @OneToMany(mappedBy = "contact")
