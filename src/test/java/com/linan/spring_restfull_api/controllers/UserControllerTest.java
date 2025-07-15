@@ -8,6 +8,7 @@ import com.linan.spring_restfull_api.model.UpdateUserRequest;
 import com.linan.spring_restfull_api.model.UserResponse;
 import com.linan.spring_restfull_api.model.WebResponse;
 import com.linan.spring_restfull_api.repository.UserRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -23,6 +24,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 
 
+@Slf4j
 @SpringBootTest
 @AutoConfigureMockMvc
 
@@ -94,6 +96,7 @@ class UserControllerTest {
             WebResponse<String> response = objectMapper.readValue(result.getResponse().getContentAsString(), new TypeReference<WebResponse<String>>() {
             });
             assertNotNull(response);
+            log.info("error: {}", response.getErrors());
         });
     }
 

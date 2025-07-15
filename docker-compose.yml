@@ -1,0 +1,25 @@
+version: "3"
+
+services:
+  spring-api:
+    image: spring-api-pzn
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/restapi
+      SPRING_DATASOURCE_USERNAME: springuser
+      SPRING_DATASOURCE_PASSWORD: psql123
+    depends_on:
+      - db
+
+  db:
+    image: postgres:14
+    environment:
+      POSTGRES_DB: restapi
+      POSTGRES_USER: springuser
+      POSTGRES_PASSWORD: psql123
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:

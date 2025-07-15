@@ -17,7 +17,6 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.Optional;
 
 @Component
-@Slf4j
 public class UserArgumentResolver implements HandlerMethodArgumentResolver {
 
     @Autowired
