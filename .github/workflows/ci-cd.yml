@@ -7,7 +7,7 @@ on:
       - master
 
 env:
-  DOCKER_IMAGE_NAME: adilinan72/spring-api-pzn
+  DOCKER_IMAGE_NAME: adilinan/spring-api-pzn
 
 jobs:
   build-and-push:
