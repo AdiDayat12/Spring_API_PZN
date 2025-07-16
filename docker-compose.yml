@@ -3,6 +3,7 @@ version: "3"
 services:
   spring-api:
     image: spring-api-pzn
+    build: .
     ports:
       - "8080:8080"
     environment:
