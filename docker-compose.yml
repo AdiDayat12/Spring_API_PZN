@@ -1,15 +1,15 @@
-version: "3"
-
 services:
   spring-api:
-    image: spring-api-pzn
-    build: .
+    image: adilinan/spring-api-pzn:latest
     ports:
       - "8080:8080"
+    env_file:
+      - .env
     environment:
       SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/restapi
       SPRING_DATASOURCE_USERNAME: springuser
       SPRING_DATASOURCE_PASSWORD: psql123
+      NEW_RELIC_APP_NAME: spring_api_net
     depends_on:
       - db
 
