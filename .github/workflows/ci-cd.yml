@@ -8,6 +8,8 @@ on:
 
 env:
   DOCKER_IMAGE_NAME: adilinan/spring-api-pzn
+  NEW_RELIC_LICENSE_KEY: ${{ secrets.NEW_RELIC_LICENSE_KEY }}
+  SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
 
 jobs:
   build-and-push:
@@ -33,7 +35,10 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Build Docker image
-        run: docker build -t ${{ env.DOCKER_IMAGE_NAME }}:latest .
+        run: docker build \
+            --build-arg NEW_RELIC_LICENSE_KEY=${{ env.NEW_RELIC_LICENSE_KEY }} \
+            --build-arg SENTRY_DSN=${{ env.SENTRY_DSN }} \
+            -t ${{ env.DOCKER_IMAGE_NAME }}:latest .
 
       - name: Push Docker image
         run: docker push ${{ env.DOCKER_IMAGE_NAME }}:latest
