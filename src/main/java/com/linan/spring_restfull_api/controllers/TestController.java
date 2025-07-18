@@ -4,20 +4,20 @@ import io.sentry.Sentry;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-/**
- * @author adilinan
- */
+
 @RestController
 public class TestController {
 
     @GetMapping("/test-error")
-    public String testError() {
+    public void testError() {
         try {
             throw new Exception("This is a test.");
         } catch (Exception e) {
             Sentry.captureException(e);
+            throw new RuntimeException(e); // lempar ulang agar tercatat sebagai error
         }
-        return "Error sent to Sentry";
     }
+
+
 }
 
