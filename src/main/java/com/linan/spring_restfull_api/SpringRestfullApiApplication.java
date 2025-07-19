@@ -8,13 +8,17 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class SpringRestfullApiApplication {
 
 	public static void main(String[] args) {
-		Dotenv dotenv = Dotenv.load();
-		dotenv.entries().forEach(
-				entry -> {
-					System.setProperty(entry.getKey(), entry.getValue());
-				}
-		);
+		try {
+			Dotenv dotenv = Dotenv.load();
+			dotenv.entries().forEach(
+					entry -> System.setProperty(entry.getKey(), entry.getValue())
+			);
+		} catch (Exception ignored) {
+			// Ignore error if .env or dotenv-java is not available (e.g., in Docker)
+		}
+
 		SpringApplication.run(SpringRestfullApiApplication.class, args);
 	}
+
 
 }
