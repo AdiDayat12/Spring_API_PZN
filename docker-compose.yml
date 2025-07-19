@@ -1,3 +1,5 @@
+version: '3.8'
+
 services:
   spring-api:
     image: adilinan/spring-api-pzn:latest
@@ -11,7 +13,10 @@ services:
       SPRING_DATASOURCE_PASSWORD: psql123
       NEW_RELIC_APP_NAME: spring_api_net
     depends_on:
-      - db
+      db:
+        condition: service_healthy
+    networks:
+      - app-network
 
   db:
     image: postgres:14
@@ -21,6 +26,15 @@ services:
       POSTGRES_PASSWORD: psql123
     volumes:
       - pgdata:/var/lib/postgresql/data
-
+    networks:
+      - app-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U springuser"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 volumes:
   pgdata:
+
+networks:
+  app-network:
