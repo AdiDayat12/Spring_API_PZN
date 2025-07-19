@@ -14,9 +14,5 @@ ENV NEW_RELIC_LICENSE_KEY=${NEW_RELIC_LICENSE_KEY}
 ENV NEW_RELIC_APP_NAME=spring_api_net
 
 
-ENTRYPOINT ["java",
-  "-javaagent:/usr/local/newrelic/newrelic.jar",
-  "-Dspring.config.additional-location=classpath:/,file:./",
-  "-Dspring.profiles.active=default",
-  "-jar", "/app.jar"
-]
+ENTRYPOINT ["java", "-javaagent:/usr/local/newrelic/newrelic.jar", "-Dspring.config.additional-location=classpath:/,file:./", "-Dspring.profiles.active=default", "-jar", "/app.jar"]
+
